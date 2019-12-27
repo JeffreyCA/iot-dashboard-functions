@@ -4,8 +4,7 @@
 arduino.json
 c_cpp_properties.json
 
-# Azure Functions localsettings file
-local.settings.json
+# local.settings.json
 
 # User-specific files
 *.suo

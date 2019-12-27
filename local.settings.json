@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "TWELVEDATA_API_KEY": "",
+    "OPEN_WEATHER_MAP_API_KEY": ""
+  }
+}
