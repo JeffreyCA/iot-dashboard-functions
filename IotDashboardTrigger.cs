@@ -41,9 +41,11 @@ namespace ca.jeffrey
       float exchangeRate = await financeHttpClient.GetClosingPrice(currencyPair);
       float stockPrice = await financeHttpClient.GetClosingPrice(ticker);
 
-      Tuple<string, float> weatherData = await weatherHttpClient.GetWeather(location);
-      string condition = weatherData.Item1;
-      float temp = weatherData.Item2;
+      WeatherModel weatherModel = await weatherHttpClient.GetWeather(location);
+      string condition = weatherModel.Condition;
+      float temp = weatherModel.Temp;
+      float tempMin = weatherModel.TempMin;
+      float tempMax = weatherModel.TempMax;
 
       // Construct response object
       var responseObj = new
@@ -51,11 +53,13 @@ namespace ca.jeffrey
         exchange_rate = exchangeRate,
         stock_price = stockPrice,
         condition = condition,
-        temp = temp
+        temp = temp,
+        temp_min = tempMin,
+        temp_max = tempMax
       };
       var responseJson = JsonConvert.SerializeObject(responseObj);
 
-      // Return resposne message
+      // Return response message
       return new HttpResponseMessage(HttpStatusCode.OK)
       {
         Content = new StringContent(responseJson, Encoding.UTF8, "application/json")

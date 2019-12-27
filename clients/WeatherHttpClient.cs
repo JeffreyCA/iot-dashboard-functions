@@ -21,7 +21,7 @@ public class WeatherHttpClient
     httpClient = new HttpClient();
   }
 
-  public async Task<Tuple<string, float>> GetWeather(string location)
+  public async Task<WeatherModel> GetWeather(string location)
   {
     var queryArguments = new Dictionary<string, string>()
         {
@@ -37,7 +37,9 @@ public class WeatherHttpClient
     JObject obj = JObject.Parse(content);
     string condition = (string)obj["weather"][0]["main"];
     float temp = (float)obj["main"]["temp"];
+    float tempMin = (float)obj["main"]["temp_min"];
+    float tempMax = (float)obj["main"]["temp_max"];
 
-    return new Tuple<string, float>(condition, temp);
+    return new WeatherModel(condition, temp, tempMin, tempMax);
   }
 }
